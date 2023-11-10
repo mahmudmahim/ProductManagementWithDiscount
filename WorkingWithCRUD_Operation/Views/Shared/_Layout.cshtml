@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <style>
+        body{
+            font-family:'Century';
+            font-size: 1em;
+        }
+    </style>
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="mainNav">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bolder fs-3" href="#page-top">Web Application</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", new { }, new { @class = "nav-link fw-bold text-dark" })
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <footer class="container-fluid">
+        <p class="text-center mt-3">&copy; @DateTime.Now.Year - All Right Reserved Mahmud Mahim!!</p>
+    </footer>
+    <script src="~/Scripts/bootstrap.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

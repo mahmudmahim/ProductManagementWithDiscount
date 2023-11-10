@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WorkingWithCRUD_Operation.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="display-6 mt-2 bg-info text-dark">Products List</h2>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Add New","Create",new {},new {@class="btn btn-primary fs-4"})
+        </div>
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    @*//To show Column Name(DisplayNameFor)*@
+                    <th>@Html.DisplayNameFor(x => x.ProductId)</th>
+                    <th>@Html.DisplayNameFor(x => x.ProductName)</th>
+                    <th>@Html.DisplayNameFor(x => x.UnitPrice)</th>
+                    <th>@Html.DisplayNameFor(x => x.Discount) (%)</th>
+                    <th>You Save</th>
+                    <th>Payment Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+            {
+                    //To Show Column Data(DisplayFor)
+                <tr>
+                    <td>@Html.DisplayFor(x => item.ProductId)</td>
+                    <td>@Html.DisplayFor(x => item.ProductName)</td>
+                    <td>@Html.DisplayFor(x => item.UnitPrice)</td>
+                    <td>@((item.Discount * 100).ToString("0.##"))</td>
+                    <td>
+                        @((item.UnitPrice * item.Discount).ToString("0.00"))
+                    </td>
+                    <td>
+                        @((item.UnitPrice - (item.UnitPrice * item.Discount)).ToString("0.00"))
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-outline-primary btn-sm" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-outline-danger btn-sm" })
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <ul class="pagination pagination-sm">
+                @for(var i =1; i <= ViewBag.totalPages; i++)
+            {
+                <li class='page-item @(ViewBag.currentPage==i?"active":"")'>
+                    @Html.ActionLink(i.ToString(),"Index",new {page = i},new {@class="page-link"})
+                </li>
+            }
+            </ul>
+        </div>
+    </div>
+</div>
+
